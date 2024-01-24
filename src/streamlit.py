@@ -7,7 +7,7 @@ with open('../models/LinearRegression_.sav', 'rb') as file:
     modelo_regresion = pickle.load(file)
 
 # scaler
-with open('/workspace/machine-learning-streamlit/models/scaler.pkl', 'rb') as scaler_file:
+with open('/../models/scaler.pkl', 'rb') as scaler_file:
     scaler = pickle.load(scaler_file)
 
 # mapping for region, sex and smoker
