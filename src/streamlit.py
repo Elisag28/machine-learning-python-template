@@ -25,7 +25,7 @@ smoker_mapping = {
 
 sex_mapping = {
     'Female': 0, 
-    'Male' : 0
+    'Male' : 1
     }
 
 # user input
