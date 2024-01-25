@@ -7,25 +7,25 @@ with open('../models/LinearRegression_.sav', 'rb') as file:
     modelo_regresion = pickle.load(file)
 
 # scaler
-with open('/../models/scaler.pkl', 'rb') as scaler_file:
+with open('../models/scaler.pkl', 'rb') as scaler_file:
     scaler = pickle.load(scaler_file)
 
 # mapping for region, sex and smoker
 region_mapping = {
-    0: 'southwest', 
-    1: 'southeast', 
-    2: 'northwest', 
-    3: 'northeast'
+    'southwest' : 0, 
+    'southeast': 1, 
+    'northwest': 2, 
+    'northeast': 3
     }
 
 smoker_mapping = {
-    0: 'yes', 
-    1: 'no'
+    'yes': 0, 
+    'no': 1
     }
 
 sex_mapping = {
-    0: 'female', 
-    1: 'male'
+    'Female': 0, 
+    'Male' : 0
     }
 
 # user input
