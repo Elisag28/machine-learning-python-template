@@ -10,6 +10,8 @@ with open('../models/LinearRegression_.sav', 'rb') as file:
 with open('../models/scaler.pkl', 'rb') as scaler_file:
     scaler = pickle.load(scaler_file)
 
+feature_names = scaler.get_feature_names_out()
+
 # mapping for region, sex and smoker
 region_mapping = {
     'southwest' : 0, 
