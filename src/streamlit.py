@@ -4,7 +4,7 @@ import pandas as pd
 
 # model
 with open('../models/LinearRegression_.sav', 'rb') as file:
-    modelo_regresion = pickle.load(file)
+    model = pickle.load(file)
 
 # scaler
 with open('../models/scaler.pkl', 'rb') as scaler_file:
@@ -19,8 +19,8 @@ region_mapping = {
     }
 
 smoker_mapping = {
-    'yes': 0, 
-    'no': 1
+    'Yes': 0, 
+    'No': 1
     }
 
 sex_mapping = {
@@ -36,10 +36,9 @@ age = st.slider(
     step = 1
     )
 
-sex_factorized = st.selectbox(
+sex_n = st.selectbox(
     'Plase, enter the sex:',
-    ['Female', 'Male'],
-    format_func=lambda x: sex_mapping[x]
+    ['Female', 'Male']
     )
 
 bmi = st.slider(
@@ -56,35 +55,27 @@ children = st.slider(
     step = 1
     )
 
-smoker_factorized = st.selectbox(
+smoker_n = st.selectbox(
     'Are you a smoker?', 
-    ['Yes', 'No'],
-    format_func=lambda x: smoker_mapping[x]
+    ['Yes', 'No'] 
     )
 
-region_factorized = st.selectbox(
+region_n = st.selectbox(
     'Region:',
     ['southwest', 'southeast', 'northwest', 'northeast'],
     )
 
-# create a dataframe with the data entered by the user
-input_data = pd.DataFrame({
-    'age': [age],
-    'sex': [sex_factorized],
-    'bmi': [bmi],
-    'children': [children],
-    'smoker': [smoker_factorized],
-    'region': [region_factorized.lower()]
-})
+if st.button("Predict"):
+    row = [
+        age,
+        sex_mapping[sex_n],
+        smoker_mapping[smoker_n],
+        children,
+        bmi,
+        region_mapping[region_n]
+        ]
 
-# conver categorical variables to dummy
-input_data = pd.get_dummies(input_data, columns=['sex', 'smoker', 'region'], drop_first=True)
+    scal_data = scaler.transform([row])
+    y_pred = model.predict([row])
 
-# normalice the data
-input_data_scaled = scaler.transform(input_data)
-
-# make prediction
-prediction = modelo_regresion.predict(input_data_scaled)
-
-# Mostrar resultados
-st.write(f'The charge for your insurance is: : ${prediction[0]:,.2f}')
+    st.write(f'The charge for your insurance is: ${y_pred[0]:,.2f}')
