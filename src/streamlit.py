@@ -12,6 +12,10 @@ with open('../models/scaler.pkl', 'rb') as scaler_file:
 
 feature_names = scaler.get_feature_names_out()
 
+st.markdown('<style>h1 { color: brown; }</style>', unsafe_allow_html=True)
+# Website title
+st.title("Insurance Calculator")
+
 # mapping for region, sex and smoker
 region_mapping = {
     'southwest' : 0, 
